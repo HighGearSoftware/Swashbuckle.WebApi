@@ -6,7 +6,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class ApplyResponseVendorExtensions : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             if (operation.operationId != "Products_GetAllByType") return;
 

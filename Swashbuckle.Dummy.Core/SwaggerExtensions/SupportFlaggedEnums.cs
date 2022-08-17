@@ -6,7 +6,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class SupportFlaggedEnums : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             if (operation.parameters == null) return;
 

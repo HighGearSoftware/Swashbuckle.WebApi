@@ -7,7 +7,7 @@ namespace Swashbuckle.Swagger.FromUriParams
 {
     public class HandleFromUriParams : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             if (operation.parameters == null) return;
 

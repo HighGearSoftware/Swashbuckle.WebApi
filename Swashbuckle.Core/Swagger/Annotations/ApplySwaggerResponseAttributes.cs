@@ -8,7 +8,7 @@ namespace Swashbuckle.Swagger.Annotations
 {
     public class ApplySwaggerResponseAttributes : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             if (apiDescription.GetControllerAndActionAttributes<SwaggerResponseRemoveDefaultsAttribute>().Any()) 
                 operation.responses.Clear();

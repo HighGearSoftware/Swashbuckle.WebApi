@@ -5,7 +5,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class AddFileUploadParams : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             if (operation.operationId == "FileUpload_PostFormData")
             {

@@ -5,7 +5,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class UpdateFileDownloadOperations : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             if (operation.operationId == "FileDownload_GetFile")
             {

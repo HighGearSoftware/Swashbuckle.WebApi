@@ -8,7 +8,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class AssignOAuth2SecurityRequirements : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             // Correspond each "Authorize" role to an oauth2 scope
             var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()

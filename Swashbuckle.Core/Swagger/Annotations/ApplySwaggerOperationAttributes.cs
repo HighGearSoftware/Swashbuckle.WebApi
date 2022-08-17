@@ -5,7 +5,7 @@ namespace Swashbuckle.Swagger.Annotations
 {
     public class ApplySwaggerOperationAttributes : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             var attribute = apiDescription.ActionDescriptor.GetCustomAttributes<SwaggerOperationAttribute>()
                 .FirstOrDefault();

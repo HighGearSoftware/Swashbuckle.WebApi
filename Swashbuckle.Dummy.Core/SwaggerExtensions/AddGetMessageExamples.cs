@@ -6,7 +6,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class AddGetMessageExamples : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             var successResponse = operation.responses["200"];
             successResponse.examples = new Dictionary<string, object>()

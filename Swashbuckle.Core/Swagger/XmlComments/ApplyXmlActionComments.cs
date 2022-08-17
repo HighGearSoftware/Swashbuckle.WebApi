@@ -25,7 +25,7 @@ namespace Swashbuckle.Swagger.XmlComments
             _xmlDoc = xmlDoc;
         }
 
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             var reflectedActionDescriptor = apiDescription.ActionDescriptor as ReflectedHttpActionDescriptor;
             if (reflectedActionDescriptor == null) return;

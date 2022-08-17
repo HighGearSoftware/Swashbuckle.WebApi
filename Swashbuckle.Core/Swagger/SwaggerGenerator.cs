@@ -51,7 +51,7 @@ namespace Swashbuckle.Swagger
                 .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()))
                 .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
                 .GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
-                .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry));
+                .ToDictionary(group => "/" + group.Key, group => CreatePathItem(apiVersion, group, schemaRegistry));
 
             var rootUri = new Uri(rootUrl);
             var port = (!rootUri.IsDefaultPort) ? ":" + rootUri.Port : string.Empty;
@@ -82,7 +82,7 @@ namespace Swashbuckle.Swagger
                 : _apiExplorer.ApiDescriptions.Where(apiDesc => _options.VersionSupportResolver(apiDesc, apiVersion));
         }
 
-        private PathItem CreatePathItem(IEnumerable<ApiDescription> apiDescriptions, SchemaRegistry schemaRegistry)
+        private PathItem CreatePathItem(string apiVersion, IEnumerable<ApiDescription> apiDescriptions, SchemaRegistry schemaRegistry)
         {
             var pathItem = new PathItem();
 
@@ -101,25 +101,25 @@ namespace Swashbuckle.Swagger
                 switch (httpMethod)
                 {
                     case "get":
-                        pathItem.get = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.get = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                     case "put":
-                        pathItem.put = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.put = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                     case "post":
-                        pathItem.post = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.post = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                     case "delete":
-                        pathItem.delete = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.delete = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                     case "options":
-                        pathItem.options = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.options = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                     case "head":
-                        pathItem.head = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.head = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                     case "patch":
-                        pathItem.patch = CreateOperation(apiDescription, schemaRegistry);
+                        pathItem.patch = CreateOperation(apiVersion, apiDescription, schemaRegistry);
                         break;
                 }
             }
@@ -127,7 +127,7 @@ namespace Swashbuckle.Swagger
             return pathItem;
         }
 
-        private Operation CreateOperation(ApiDescription apiDesc, SchemaRegistry schemaRegistry)
+        private Operation CreateOperation(string apiVersion, ApiDescription apiDesc, SchemaRegistry schemaRegistry)
         {
             var parameters = apiDesc.ParameterDescriptions
                 .Where(paramDesc =>
@@ -162,7 +162,7 @@ namespace Swashbuckle.Swagger
 
             foreach (var filter in _options.OperationFilters)
             {
-                filter.Apply(operation, schemaRegistry, apiDesc);
+                filter.Apply(apiVersion, operation, schemaRegistry, apiDesc);
             }
 
             return operation;

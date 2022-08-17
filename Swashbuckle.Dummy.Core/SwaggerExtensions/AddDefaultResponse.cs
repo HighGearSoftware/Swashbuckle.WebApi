@@ -6,7 +6,7 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
 {
     public class AddDefaultResponse : IOperationFilter
     {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        public void Apply(string apiVersion, Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             var errorSchema = schemaRegistry.GetOrRegister(typeof(HttpError));
 
